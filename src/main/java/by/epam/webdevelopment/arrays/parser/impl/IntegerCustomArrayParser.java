@@ -3,7 +3,7 @@ package by.epam.webdevelopment.arrays.parser.impl;
 import by.epam.webdevelopment.arrays.exception.ProjectException;
 import by.epam.webdevelopment.arrays.parser.CustomArrayParser;
 
-public class CustomIntegerCustomArrayParser implements CustomArrayParser {
+public class IntegerCustomArrayParser implements CustomArrayParser {
     private static final String REGEX_DELIMITER = "\\s+";
     @Override
     public int[] parseString(String string) throws ProjectException {

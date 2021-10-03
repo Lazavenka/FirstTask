@@ -7,11 +7,11 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class CustomIntegerCustomArrayParserTest {
+public class IntegerCustomArrayParserTest {
     CustomArrayParser parser;
     @BeforeClass
     public void setUp(){
-        parser = new CustomIntegerCustomArrayParser();
+        parser = new IntegerCustomArrayParser();
     }
     @Test
     public void testParseString() throws ProjectException {

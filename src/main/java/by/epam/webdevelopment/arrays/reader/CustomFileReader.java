@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CustomFileReader {
@@ -21,8 +20,8 @@ public class CustomFileReader {
         Path path = Paths.get(stringFilePath);
 
         try (Stream<String> lineStream = Files.lines(path)) {
+            logger.log(Level.INFO, "Found file " + path);
             lineStream.map(String::strip)
-                    .collect(Collectors.toList())
                     .forEach(line -> {
                         logger.log(Level.INFO, "Read line: " + line);
                         lines.add(line);
