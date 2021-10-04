@@ -30,7 +30,7 @@ public class IntegerCustomArrayParserTest {
 
     @Test(expectedExceptions = NumberFormatException.class)
     public void testParseString_incorrectData() throws ProjectException {
-        String nullData = "1 5  9.4 3 -5  55";
-        int[] actual = parser.parseString(nullData);
+        String invalidData = "1 5  9.4 3 -5  55";
+        int[] actual = parser.parseString(invalidData);
     }
 }
