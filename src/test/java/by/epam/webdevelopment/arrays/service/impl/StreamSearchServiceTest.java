@@ -21,7 +21,7 @@ public class StreamSearchServiceTest {
         searchService = new StreamSearchService();
         //searchService = new CustomSearchService();
         CustomFileReader fileReader = new CustomFileReader();
-        List<String> lines = fileReader.readLinesFromFile("src/main/resources/testdata.txt");
+        List<String> lines = fileReader.readLinesFromFile("src/main/resources/data/testdata.txt");
         IntegerCustomArrayParser parser = new IntegerCustomArrayParser();
         try {
             testCustomArray = new CustomArray(parser.parseString(lines.get(0)));

@@ -1,4 +1,4 @@
-package by.epam.webdevelopment.arrays;
+package by.epam.webdevelopment.arrays.main;
 
 import by.epam.webdevelopment.arrays.entity.CustomArray;
 import by.epam.webdevelopment.arrays.exception.ProjectException;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 public class App {
     private static final Logger logger = LogManager.getLogger(App.class);
-    private static final String FILE_PATH = "src/main/resources/data.txt";
+    private static final String FILE_PATH = "src/main/resources/data/data.txt";
 
     public static void main(String[] args) {
         CustomFileReader fileReader = new CustomFileReader();
