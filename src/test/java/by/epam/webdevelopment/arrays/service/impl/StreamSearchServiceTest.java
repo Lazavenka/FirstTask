@@ -3,13 +3,14 @@ package by.epam.webdevelopment.arrays.service.impl;
 import by.epam.webdevelopment.arrays.entity.CustomArray;
 import by.epam.webdevelopment.arrays.exception.ProjectException;
 import by.epam.webdevelopment.arrays.parser.impl.IntegerCustomArrayParser;
-import by.epam.webdevelopment.arrays.reader.CustomFileReader;
+import by.epam.webdevelopment.arrays.reader.impl.CustomFileReaderImpl;
 import by.epam.webdevelopment.arrays.service.SearchService;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static by.epam.webdevelopment.arrays.creator.CustomArrayCreator.createCustomArray;
 import static org.testng.Assert.*;
 
 public class StreamSearchServiceTest {
@@ -20,11 +21,11 @@ public class StreamSearchServiceTest {
     public void setUp() {
         searchService = new StreamSearchService();
         //searchService = new CustomSearchService();
-        CustomFileReader fileReader = new CustomFileReader();
+        CustomFileReaderImpl fileReader = new CustomFileReaderImpl();
         List<String> lines = fileReader.readLinesFromFile("src/main/resources/data/testdata.txt");
         IntegerCustomArrayParser parser = new IntegerCustomArrayParser();
         try {
-            testCustomArray = new CustomArray(parser.parseString(lines.get(0)));
+            testCustomArray = createCustomArray(parser.parseString(lines.get(0)));
         } catch (ProjectException e) {
             e.printStackTrace();
         }
@@ -74,10 +75,10 @@ public class StreamSearchServiceTest {
 
     @Test
     public void testChangeValuesByCondition() throws ProjectException {
-        CustomArray copyArray = new CustomArray(testCustomArray.getCopyArray());
+        CustomArray copyArray;
         CustomArray expectedCustomArray = new CustomArray(new int[]{-14, 16, 64, -33, 10, 6, 22, 64});
 
-        searchService.changeValuesByCondition(copyArray);
+        copyArray = searchService.changeValuesByCondition(testCustomArray);
 
         assertEquals(copyArray, expectedCustomArray);
     }

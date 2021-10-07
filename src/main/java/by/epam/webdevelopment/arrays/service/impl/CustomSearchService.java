@@ -1,5 +1,6 @@
 package by.epam.webdevelopment.arrays.service.impl;
 
+import by.epam.webdevelopment.arrays.creator.CustomArrayCreator;
 import by.epam.webdevelopment.arrays.entity.CustomArray;
 import by.epam.webdevelopment.arrays.exception.ProjectException;
 import by.epam.webdevelopment.arrays.service.SearchService;
@@ -71,16 +72,18 @@ public class CustomSearchService implements SearchService {
     }
 
     @Override
-    public void changeValuesByCondition(CustomArray array) throws ProjectException {
-        for (int i = 0; i < array.getLength(); i++) {
-            int element = array.getElement(i);
+    public CustomArray changeValuesByCondition(CustomArray array) throws ProjectException {
+        CustomArray copyArray = CustomArrayCreator.createCustomArray(array.getArray());
+        for (int i = 0; i < copyArray.getLength(); i++) {
+            int element = copyArray.getElement(i);
             int newValue;
             if (element % 2 == 0){
                 newValue = element / 2;
             }else {
                 newValue = element * 3 + 1;
             }
-            array.setElement(newValue, i);
+            copyArray.setElement(newValue, i);
         }
+        return copyArray;
     }
 }

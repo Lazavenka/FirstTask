@@ -14,7 +14,7 @@ public class IntegerCustomArrayParserTest {
         parser = new IntegerCustomArrayParser();
     }
     @Test
-    public void testParseString() throws ProjectException {
+    public void testParseStringCorrectData() throws ProjectException {
         String validData = "1 5  9 3 -5  55";
         int[] expected = {1, 5, 9, 3, -5, 55};
         int[] actual = parser.parseString(validData);
@@ -23,13 +23,13 @@ public class IntegerCustomArrayParserTest {
     }
 
     @Test(expectedExceptions = ProjectException.class)
-    public void testParseString_nullData() throws ProjectException {
+    public void testParseStringNullData() throws ProjectException {
         String nullData = null;
         int[] actual = parser.parseString(nullData);
     }
 
     @Test(expectedExceptions = NumberFormatException.class)
-    public void testParseString_incorrectData() throws ProjectException {
+    public void testParseStringIncorrectData() throws ProjectException {
         String invalidData = "1 5  9.4 3 -5  55";
         int[] actual = parser.parseString(invalidData);
     }

@@ -1,5 +1,6 @@
 package by.epam.webdevelopment.arrays.service.impl;
 
+import by.epam.webdevelopment.arrays.creator.CustomArrayCreator;
 import by.epam.webdevelopment.arrays.entity.CustomArray;
 import by.epam.webdevelopment.arrays.exception.ProjectException;
 import by.epam.webdevelopment.arrays.service.SearchService;
@@ -14,7 +15,7 @@ public class StreamSearchService implements SearchService {
 
     @Override
     public int findMaxValue(CustomArray array) {
-        IntStream copyArrayStream = IntStream.of(array.getCopyArray());
+        IntStream copyArrayStream = IntStream.of(array.getArray());
         OptionalInt optMax = copyArrayStream.max();
         int result = 0;
         if (optMax.isPresent()) {
@@ -27,7 +28,7 @@ public class StreamSearchService implements SearchService {
 
     @Override
     public int findMinValue(CustomArray array) {
-        IntStream copyArrayStream = IntStream.of(array.getCopyArray());
+        IntStream copyArrayStream = IntStream.of(array.getArray());
         OptionalInt optMin = copyArrayStream.min();
         int result = 0;
         if (optMin.isPresent()) {
@@ -40,45 +41,45 @@ public class StreamSearchService implements SearchService {
 
     @Override
     public double findAverageValue(CustomArray array) {
-        long sum = sumValues(array);
-        int numberOfElements = array.getLength();
-        return (double) sum / numberOfElements;
+        return IntStream.of(array.getArray()).average().orElse(0);
     }
 
     @Override
     public long positiveValuesCount(CustomArray array) {
-        IntStream copyArrayStream = IntStream.of(array.getCopyArray());
+        IntStream copyArrayStream = IntStream.of(array.getArray());
         return copyArrayStream.filter(i -> i >= 0).count();
     }
 
     @Override
     public long negativeValuesCount(CustomArray array) {
-        IntStream copyArrayStream = IntStream.of(array.getCopyArray());
+        IntStream copyArrayStream = IntStream.of(array.getArray());
         return copyArrayStream.filter(i -> i < 0).count();
     }
 
     @Override
     public long sumValues(CustomArray array) {
-        IntStream copyArrayStream = IntStream.of(array.getCopyArray());
+        IntStream copyArrayStream = IntStream.of(array.getArray());
         return copyArrayStream.sum();
     }
 
     @Override
-    public void changeValuesByCondition(CustomArray array){
+    public CustomArray changeValuesByCondition(CustomArray array){
+        CustomArray copyArray = CustomArrayCreator.createCustomArray(array.getArray());
         IntStream.range(0,array.getLength())
                 .forEach(index -> {
                     try {
-                        int element = array.getElement(index);
+                        int element = copyArray.getElement(index);
                         int newValue;
                         if (element % 2 == 0){
                             newValue = element / 2;
                         }else {
                             newValue = element * 3 + 1;
                         }
-                        array.setElement(newValue, index);
+                        copyArray.setElement(newValue, index);
                     } catch (ProjectException e) {
                         logger.error("Index out of bound: " + e);
                     }
                 });
+        return copyArray;
     }
 }

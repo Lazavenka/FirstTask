@@ -4,48 +4,47 @@ import by.epam.webdevelopment.arrays.entity.CustomArray;
 import by.epam.webdevelopment.arrays.exception.ProjectException;
 import by.epam.webdevelopment.arrays.service.SortService;
 
-import java.util.Random;
+import static by.epam.webdevelopment.arrays.creator.CustomArrayCreator.*;
 
 public class CustomArraySortService implements SortService {
     @Override
-    public void insertionSort(CustomArray customArray) throws ProjectException {
-        for (int left = 0; left < customArray.getLength(); left++) {
-            // Вытаскиваем значение элемента
-            int value = customArray.getElement(left);
-            // Перемещаемся по элементам, которые перед вытащенным элементом
-            int i = left - 1;
-            for (; i >= 0; i--) {
-                // Если вытащили значение меньшее — передвигаем больший элемент дальше
-                if (value < customArray.getElement(i)) {
-                    customArray.setElement(customArray.getElement(i), i + 1);
-                } else {
-                    // Если вытащенный элемент больше — останавливаемся
-                    break;
-                }
+    public CustomArray insertionSort(CustomArray customArray) throws ProjectException {
+        CustomArray copyArray = createCustomArray(customArray.getArray());
+        int length = copyArray.getLength();
+        for (int i = 1; i < length; ++i) {
+            int key = copyArray.getElement(i);
+            int j = i - 1;
+            while (j >= 0 && copyArray.getElement(j) > key) {
+                copyArray.setElement(copyArray.getElement(j), j + 1);
+                j = j - 1;
             }
-            // В освободившееся место вставляем вытащенное значение
-            customArray.setElement(value, i + 1);
+            copyArray.setElement(key, j + 1);
         }
+        return copyArray;
     }
 
     @Override
-    public void selectionSort(CustomArray customArray) throws ProjectException {
-        for (int left = 0; left < customArray.getLength(); left++) {
+    public CustomArray selectionSort(CustomArray customArray) throws ProjectException {
+        CustomArray copyArray = createCustomArray(customArray.getArray());
+        for (int left = 0; left < copyArray.getLength(); left++) {
             int minInd = left;
-            for (int i = left; i < customArray.getLength(); i++) {
-                if (customArray.getElement(i) < customArray.getElement(minInd)) {
+            for (int i = left; i < copyArray.getLength(); i++) {
+                if (copyArray.getElement(i) < copyArray.getElement(minInd)) {
                     minInd = i;
                 }
             }
-            swap(customArray, left, minInd);
+            swap(copyArray, left, minInd);
         }
+        return copyArray;
     }
 
     @Override
-    public void quickSort(CustomArray customArray) throws ProjectException {
+    public CustomArray quickSort(CustomArray customArray) throws ProjectException {
+        CustomArray copyArray = createCustomArray(customArray.getArray());
         int low = 0;
-        int high = customArray.getLength() - 1;
-        quickSort(customArray, low, high);
+        int high = copyArray.getLength() - 1;
+        quickSort(copyArray, low, high);
+        return copyArray;
     }
 
     private int partition(CustomArray array, int low, int high) throws ProjectException {

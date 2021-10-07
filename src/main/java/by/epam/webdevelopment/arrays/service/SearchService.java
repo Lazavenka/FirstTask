@@ -10,6 +10,6 @@ public interface SearchService{
     long positiveValuesCount(CustomArray array) throws ProjectException;
     long negativeValuesCount(CustomArray array) throws ProjectException;
     long sumValues(CustomArray array) throws ProjectException;
-    void changeValuesByCondition(CustomArray array) throws ProjectException; // if even - new value = old / 2, else - old * 3 + 1
+    CustomArray changeValuesByCondition(CustomArray array) throws ProjectException; // if even - new value = old / 2, else - old * 3 + 1
 
 }

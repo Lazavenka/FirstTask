@@ -7,12 +7,15 @@ import java.util.Arrays;
 public class CustomArray {
     private final int[] array;
 
+    public CustomArray(){
+        this.array = new int[10];
+    }
     public CustomArray(int[] array) {
         this.array = new int[array.length];
         System.arraycopy(array, 0, this.array, 0, array.length);
     }
 
-    public int[] getCopyArray(){
+    public int[] getArray(){
         return array.clone();
     }
     public int getElement(int index) throws ProjectException {
