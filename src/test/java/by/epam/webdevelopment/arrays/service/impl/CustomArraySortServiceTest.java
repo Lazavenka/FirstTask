@@ -12,11 +12,13 @@ import static org.testng.Assert.*;
 public class CustomArraySortServiceTest {
     SortService sortService;
     CustomArray testCustomArray;
+
     @BeforeClass
-    public void setUp(){
+    public void setUp() {
         sortService = new CustomArraySortService();
         testCustomArray = createCustomArray(new int[]{9, 6, 4, -5, 3, 4, 10, -2});
     }
+
     @Test
     public void testSelectionSort() throws ProjectException {
         CustomArray actualCopy;
@@ -36,6 +38,7 @@ public class CustomArraySortServiceTest {
 
         assertEquals(actualCopy, expected);
     }
+
     @Test
     public void testQuickSort() throws ProjectException {
         CustomArray actualCopy;

@@ -16,27 +16,23 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class App {
     private static final Logger logger = LogManager.getLogger(App.class);
-    private static final String FILE_PATH = "data/data.txt";
+    private static final String DEFAULT_FILE_PATH = "data/data.txt";
 
     public static void main(String[] args) {
         CustomFileReader fileReader = new CustomFileReaderImpl();
         CustomArrayValidator validator = new CustomIntegerArrayValidator();
         CustomArrayParser parser = new IntegerCustomArrayParser();
-        List<String> lines = fileReader.readLinesFromFile(FILE_PATH);
+        List<String> lines = fileReader.readLinesFromFile(DEFAULT_FILE_PATH);
         List<CustomArray> arrays = lines.stream()
                 .filter(validator::validate)
-                .map(string -> {
-                    try {
-                        return parser.parseString(string);
-                    } catch (ProjectException e) {
-                        logger.error("Parsing error: " + e);
-                    }
-                    return null;
-                })
+                .map(parser::parseStringToIntegerArray)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
                 .map(CustomArrayCreator::createCustomArray)
                 .collect(Collectors.toList());
         if (!arrays.isEmpty()) {

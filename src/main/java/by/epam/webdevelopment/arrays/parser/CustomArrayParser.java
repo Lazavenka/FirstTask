@@ -1,7 +1,7 @@
 package by.epam.webdevelopment.arrays.parser;
 
-import by.epam.webdevelopment.arrays.exception.ProjectException;
+import java.util.Optional;
 
 public interface CustomArrayParser {
-    int[] parseString(String string) throws ProjectException;
+    Optional<int[]> parseStringToIntegerArray(String string);
 }

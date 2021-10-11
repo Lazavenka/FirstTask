@@ -7,34 +7,39 @@ import java.util.Arrays;
 public class CustomArray {
     private final int[] array;
 
-    public CustomArray(){
+    public CustomArray() {
         this.array = new int[10];
     }
+
     public CustomArray(int[] array) {
         this.array = new int[array.length];
         System.arraycopy(array, 0, this.array, 0, array.length);
     }
 
-    public int[] getArray(){
+    public int[] getArray() {
         return array.clone();
     }
+
     public int getElement(int index) throws ProjectException {
         if (index >= 0 && index < array.length) {
             return array[index];
-        }else {
+        } else {
             throw new ProjectException("Index out of bounds!");
         }
     }
-    public int getLength(){
+
+    public int getLength() {
         return array.length;
     }
+
     public void setElement(int value, int index) throws ProjectException {
         if (index >= 0 && index < array.length) {
             array[index] = value;
-        }else {
+        } else {
             throw new ProjectException("Index out of bounds!");
         }
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

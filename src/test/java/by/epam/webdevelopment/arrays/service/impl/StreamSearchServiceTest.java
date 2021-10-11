@@ -22,13 +22,10 @@ public class StreamSearchServiceTest {
         searchService = new StreamSearchService();
         //searchService = new CustomSearchService();
         CustomFileReaderImpl fileReader = new CustomFileReaderImpl();
-        List<String> lines = fileReader.readLinesFromFile("src/main/resources/data/testdata.txt");
+        List<String> lines = fileReader.readLinesFromFile("data/testdata.txt");
         IntegerCustomArrayParser parser = new IntegerCustomArrayParser();
-        try {
-            testCustomArray = createCustomArray(parser.parseString(lines.get(0)));
-        } catch (ProjectException e) {
-            e.printStackTrace();
-        }
+        int[] array = parser.parseStringToIntegerArray(lines.get(0)).orElse(new int[0]);
+        testCustomArray = createCustomArray(array);
     }
 
     @Test

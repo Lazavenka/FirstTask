@@ -63,16 +63,16 @@ public class StreamSearchService implements SearchService {
     }
 
     @Override
-    public CustomArray changeValuesByCondition(CustomArray array){
+    public CustomArray changeValuesByCondition(CustomArray array) {
         CustomArray copyArray = CustomArrayCreator.createCustomArray(array.getArray());
-        IntStream.range(0,array.getLength())
+        IntStream.range(0, array.getLength())
                 .forEach(index -> {
                     try {
                         int element = copyArray.getElement(index);
                         int newValue;
-                        if (element % 2 == 0){
+                        if (element % 2 == 0) {
                             newValue = element / 2;
-                        }else {
+                        } else {
                             newValue = element * 3 + 1;
                         }
                         copyArray.setElement(newValue, index);

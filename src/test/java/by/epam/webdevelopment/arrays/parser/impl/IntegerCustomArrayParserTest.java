@@ -1,36 +1,46 @@
 package by.epam.webdevelopment.arrays.parser.impl;
 
-import by.epam.webdevelopment.arrays.exception.ProjectException;
 import by.epam.webdevelopment.arrays.parser.CustomArrayParser;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.Optional;
 
 import static org.testng.Assert.*;
 
 public class IntegerCustomArrayParserTest {
     CustomArrayParser parser;
+
     @BeforeClass
-    public void setUp(){
+    public void setUp() {
         parser = new IntegerCustomArrayParser();
     }
+
     @Test
-    public void testParseStringCorrectData() throws ProjectException {
+    public void testParseStringCorrectData() {
         String validData = "1 5  9 3 -5  55";
         int[] expected = {1, 5, 9, 3, -5, 55};
-        int[] actual = parser.parseString(validData);
+        Optional<int[]> actualOptional = parser.parseStringToIntegerArray(validData);
+        int[] actual = actualOptional.orElseThrow();
 
         assertEquals(actual, expected);
     }
 
-    @Test(expectedExceptions = ProjectException.class)
-    public void testParseStringNullData() throws ProjectException {
+    @Test
+    public void testParseStringNullData() {
         String nullData = null;
-        int[] actual = parser.parseString(nullData);
+        Optional<int[]> actual = parser.parseStringToIntegerArray(nullData);
+        Optional<int[]> expected = Optional.empty();
+
+        assertEquals(actual, expected);
     }
 
-    @Test(expectedExceptions = NumberFormatException.class)
-    public void testParseStringIncorrectData() throws ProjectException {
+    @Test
+    public void testParseStringIncorrectData() {
         String invalidData = "1 5  9.4 3 -5  55";
-        int[] actual = parser.parseString(invalidData);
+        Optional<int[]> actual = parser.parseStringToIntegerArray(invalidData);
+        Optional<int[]> expected = Optional.empty();
+
+        assertEquals(actual, expected);
     }
 }

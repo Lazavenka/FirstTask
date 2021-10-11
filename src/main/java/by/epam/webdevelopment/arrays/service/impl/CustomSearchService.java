@@ -11,7 +11,7 @@ public class CustomSearchService implements SearchService {
         int maxValue = array.getElement(0);
         for (int i = 0; i < array.getLength(); i++) {
             int current = array.getElement(i);
-            if (maxValue <= current){
+            if (maxValue <= current) {
                 maxValue = current;
             }
         }
@@ -23,7 +23,7 @@ public class CustomSearchService implements SearchService {
         int minValue = array.getElement(0);
         for (int i = 0; i < array.getLength(); i++) {
             int current = array.getElement(i);
-            if (minValue >= current){
+            if (minValue >= current) {
                 minValue = current;
             }
         }
@@ -42,7 +42,7 @@ public class CustomSearchService implements SearchService {
         int positiveCount = 0;
         for (int i = 0; i < array.getLength(); i++) {
             int current = array.getElement(i);
-            if (current >= 0){
+            if (current >= 0) {
                 positiveCount++;
             }
         }
@@ -54,7 +54,7 @@ public class CustomSearchService implements SearchService {
         int negativeCount = 0;
         for (int i = 0; i < array.getLength(); i++) {
             int current = array.getElement(i);
-            if (current < 0){
+            if (current < 0) {
                 negativeCount++;
             }
         }
@@ -77,9 +77,9 @@ public class CustomSearchService implements SearchService {
         for (int i = 0; i < copyArray.getLength(); i++) {
             int element = copyArray.getElement(i);
             int newValue;
-            if (element % 2 == 0){
+            if (element % 2 == 0) {
                 newValue = element / 2;
-            }else {
+            } else {
                 newValue = element * 3 + 1;
             }
             copyArray.setElement(newValue, i);

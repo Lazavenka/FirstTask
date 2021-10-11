@@ -11,7 +11,7 @@ public class CustomArraySortService implements SortService {
     public CustomArray insertionSort(CustomArray customArray) throws ProjectException {
         CustomArray copyArray = createCustomArray(customArray.getArray());
         int length = copyArray.getLength();
-        for (int i = 1; i < length; ++i) {
+        for (int i = 1; i < length; i++) {
             int key = copyArray.getElement(i);
             int j = i - 1;
             while (j >= 0 && copyArray.getElement(j) > key) {
